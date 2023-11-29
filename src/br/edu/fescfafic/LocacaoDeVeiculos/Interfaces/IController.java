@@ -6,5 +6,5 @@ public interface IController<T> {
     void remover(String placa);
 
     void adicionar(T Veiculo);
-    ArrayList<T> listar();
+    String listar();
 }

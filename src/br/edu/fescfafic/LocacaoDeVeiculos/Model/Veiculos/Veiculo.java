@@ -1,55 +1,47 @@
 package br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos;
 
-public abstract class Veiculo {
+import br.edu.fescfafic.LocacaoDeVeiculos.Interfaces.IVeiculo;
+
+public abstract class Veiculo implements IVeiculo {
     private String placaDoVeiculo;
     private String modeloDoVeiculo;
     private int anoDoVeiculo;
     private String combustivelUsado;
-    private boolean portaMalas;
 
-    public Veiculo() {
-
-    }
-
-    public String getPlacaDoVeiculo() {
-        return placaDoVeiculo;
-    }
-
-    public void setPlacaDoVeiculo(String placaDoVeiculo) {
+    public Veiculo(String placaDoVeiculo, String modeloDoVeiculo, int anoDoVeiculo, String combustivelUsado) {
         this.placaDoVeiculo = placaDoVeiculo;
-    }
-
-    public String getModeloDoVeiculo() {
-        return modeloDoVeiculo;
-    }
-
-    public void setModeloDoVeiculo(String modeloDoVeiculo) {
         this.modeloDoVeiculo = modeloDoVeiculo;
-    }
-
-    public int getAnoDoVeiculo() {
-        return anoDoVeiculo;
-    }
-
-    public void setAnoDoVeiculo(int anoDoVeiculo) {
         this.anoDoVeiculo = anoDoVeiculo;
-    }
-
-    public String getCombustivelUsado() {
-        return combustivelUsado;
-    }
-
-    public void setCombustivelUsado(String combustivelUsado) {
         this.combustivelUsado = combustivelUsado;
     }
 
-    public boolean isPortaMalas() {
-        return portaMalas;
+    @Override
+    public String getPlacaDoVeiculo() {
+        return this.placaDoVeiculo;
     }
 
-    public void setPortaMalas(boolean portaMalas) {
-        this.portaMalas = portaMalas;
+    @Override
+    public String getModeloDoVeiculo() {
+        return this.modeloDoVeiculo;
     }
 
+    @Override
+    public int getAnoDoVeiculo() {
+        return this.anoDoVeiculo;
+    }
 
+    @Override
+    public String getCombustivelUsado() {
+        return this.combustivelUsado;
+    }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+                "placaDoVeiculo='" + placaDoVeiculo + '\'' +
+                ", modeloDoVeiculo='" + modeloDoVeiculo + '\'' +
+                ", anoDoVeiculo=" + anoDoVeiculo +
+                ", combustivelUsado='" + combustivelUsado + '\'' +
+                '}';
+    }
 }

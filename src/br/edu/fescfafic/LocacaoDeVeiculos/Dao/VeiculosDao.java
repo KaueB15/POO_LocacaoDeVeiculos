@@ -10,8 +10,7 @@ public class VeiculosDao implements IDao<Veiculo> {
     public ArrayList<Veiculo> listaVeiculos = new ArrayList<>();
 
     @Override
-    public ArrayList<Veiculo> listar() {
-        return listaVeiculos;
+    public void listar() {
     }
 
     @Override

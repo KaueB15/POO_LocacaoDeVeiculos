@@ -8,11 +8,7 @@ import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Veiculo;
 import java.util.ArrayList;
 
 public class VeiculoController implements IController<Veiculo> {
-    public VeiculosDao dao;
-
-    public VeiculoController(){
-        this.dao = new VeiculosDao();
-    }
+    private VeiculosDao dao = new VeiculosDao();
 
 
     @Override
@@ -42,7 +38,20 @@ public class VeiculoController implements IController<Veiculo> {
     }
 
     @Override
-    public ArrayList<Veiculo> listar() {
-        return dao.listar();
+    public String listar() {
+        boolean encontrado = false;
+        try{
+            for(Veiculo veiculo : dao.listaVeiculos){
+                if(veiculo != null){
+                    return veiculo.toString();
+                }
+            }
+            if(!encontrado){
+                throw new VeiculoNaoEncontradoException();
+            }
+        }catch(VeiculoNaoEncontradoException e){
+           System.err.println(e);
+        }
+        return "";
     }
 }
