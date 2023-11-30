@@ -5,4 +5,9 @@ public interface IVeiculo {
     String getModeloDoVeiculo();
     int getAnoDoVeiculo();
     String getCombustivelUsado();
+    String getMarcaDoVeiculo();
+    void setMarcaDoVeiculo(String marca);
+    void setModeloDoVeiculo(String modelo);
+    void setAnoDoVeiculo(int ano);
+    void setCombustivelUsado(String combustivel);
 }
