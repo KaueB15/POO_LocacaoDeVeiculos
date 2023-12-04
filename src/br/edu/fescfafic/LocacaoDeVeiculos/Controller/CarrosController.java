@@ -1,23 +1,23 @@
 package br.edu.fescfafic.LocacaoDeVeiculos.Controller;
 
-import br.edu.fescfafic.LocacaoDeVeiculos.Dao.VeiculosDao;
+import br.edu.fescfafic.LocacaoDeVeiculos.Dao.CarrosDao;
 import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.NaoPossuiVeiculoException;
+import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.PlacaJaExistenteException;
 import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.VeiculoNaoEncontradoException;
 import br.edu.fescfafic.LocacaoDeVeiculos.Interfaces.IController;
-import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Veiculo;
+import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Carro;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class VeiculoController implements IController<Veiculo> {
-    private VeiculosDao dao = new VeiculosDao();
+public class CarrosController implements IController<Carro> {
+    private CarrosDao dao = new CarrosDao();
 
 
     @Override
     public void remover(String placa) {
         boolean encontrado = false;
         try {
-            for (Veiculo veiculo : dao.listaVeiculos) {
+            for (Carro veiculo : dao.listaVeiculos) {
                 if (veiculo.getPlacaDoVeiculo().equals(placa)) {
                     dao.remover(veiculo);
                     System.out.println("Veiculo Removido com sucesso");
@@ -39,7 +39,7 @@ public class VeiculoController implements IController<Veiculo> {
         String combustivelNovo;
         int anoNovo;
         try{
-            for(Veiculo veiculo : dao.listaVeiculos){
+            for(Carro veiculo : dao.listaVeiculos){
                 if (veiculo.getPlacaDoVeiculo().equals(placa)){
                     System.out.println("- Nova marca do veiculo -");
                     marcaNova = teclado.nextLine();
@@ -65,16 +65,25 @@ public class VeiculoController implements IController<Veiculo> {
     }
 
     @Override
-    public void adicionar(Veiculo veiculo) {
-        dao.adicionar(veiculo);
-        System.out.println("Veiculo adicionado");
+    public void adicionar(Carro veiculo) {
+        try {
+            for(Carro carro : dao.listaVeiculos) {
+                if (carro.getPlacaDoVeiculo().equals(veiculo.getPlacaDoVeiculo())){
+                    throw new PlacaJaExistenteException();
+                }
+            }
+            dao.adicionar(veiculo);
+            System.out.println("Veiculo adicionado");
+        }catch (PlacaJaExistenteException e){
+            System.err.println(e);
+        }
     }
 
     @Override
     public String listar() {
         boolean encontrado = false;
         try{
-            for(Veiculo veiculo : dao.listaVeiculos){
+            for(Carro veiculo : dao.listaVeiculos){
                 if(veiculo != null){
                     return veiculo.toString();
                 }
