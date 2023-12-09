@@ -14,19 +14,20 @@ public class VansController implements IController<Van> {
     public VansDao dao = new VansDao();
 
     @Override
-    public void remover(String placa) {
+    public boolean remover(String placa) {
         try {
             for (Van veiculo : dao.listaVans) {
                 if (veiculo.getPlacaDoVeiculo().equals(placa)) {
                     dao.remover(veiculo);
                     System.out.println("Veiculo Removido com sucesso");
-                    break;
+                    return true;
                 }
             }
             throw new VeiculoNaoEncontradoException();
         }catch (VeiculoNaoEncontradoException e) {
             System.err.println(e);
         }
+        return false;
     }
 
     @Override

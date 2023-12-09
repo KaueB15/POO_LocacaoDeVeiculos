@@ -14,19 +14,20 @@ public class CaminhaoController implements IController<Caminhao> {
     private CaminhaoDao dao = new CaminhaoDao();
 
     @Override
-    public void remover(String placa) {
+    public boolean remover(String placa) {
         try {
             for (Caminhao veiculo : dao.listaCaminhao) {
                 if (veiculo.getPlacaDoVeiculo().equals(placa)) {
                     dao.remover(veiculo);
                     System.out.println("Veiculo Removido com sucesso");
-                    break;
+                    return true;
                 }
             }
             throw new VeiculoNaoEncontradoException();
         }catch (VeiculoNaoEncontradoException e) {
             System.err.println(e);
         }
+        return false;
     }
 
     @Override

@@ -16,12 +16,12 @@ public class VansDao implements IDao<Van> {
 
     @Override
     public void adicionar(Van objeto) {
-
+        listaVans.add(objeto);
     }
 
     @Override
     public void remover(Van veiculo) {
-
+        listaVans.remove(veiculo);
     }
 
     @Override

@@ -8,6 +8,7 @@ public abstract class Veiculo implements IVeiculo {
     private int anoDoVeiculo;
     private String combustivelUsado;
     private String marcaDoVeiculo;
+    private boolean alugado;
 
     public Veiculo(String placaDoVeiculo, String modeloDoVeiculo, int anoDoVeiculo, String combustivelUsado, String marcaDoVeiculo) {
         this.placaDoVeiculo = placaDoVeiculo;
@@ -15,6 +16,7 @@ public abstract class Veiculo implements IVeiculo {
         this.anoDoVeiculo = anoDoVeiculo;
         this.combustivelUsado = combustivelUsado;
         this.marcaDoVeiculo = marcaDoVeiculo;
+        this.alugado = false;
     }
 
     @Override
@@ -39,7 +41,12 @@ public abstract class Veiculo implements IVeiculo {
 
     @Override
     public String getMarcaDoVeiculo() {
-        return marcaDoVeiculo;
+        return this.marcaDoVeiculo;
+    }
+
+    @Override
+    public boolean getAlugado() {
+        return this.alugado;
     }
 
     @Override

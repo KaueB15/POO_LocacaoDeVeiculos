@@ -5,7 +5,7 @@ import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Onibus;
 
 import java.util.ArrayList;
 
-public class OnibusDao implements IDao {
+public class OnibusDao implements IDao<Onibus> {
     public ArrayList<Onibus> listaOnibus = new ArrayList<>();
 
     @Override
@@ -14,13 +14,13 @@ public class OnibusDao implements IDao {
     }
 
     @Override
-    public void adicionar(Object objeto) {
-
+    public void adicionar(Onibus objeto) {
+        listaOnibus.add(objeto);
     }
 
     @Override
-    public void remover(Object veiculo) {
-
+    public void remover(Onibus veiculo) {
+        listaOnibus.remove(veiculo);
     }
 
     @Override

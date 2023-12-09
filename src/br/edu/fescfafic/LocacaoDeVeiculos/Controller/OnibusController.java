@@ -14,19 +14,20 @@ public class OnibusController implements IController<Onibus> {
     public OnibusDao dao = new OnibusDao();
 
     @Override
-    public void remover(String placa) {
+    public boolean remover(String placa) {
         try {
             for (Onibus veiculo : dao.listaOnibus) {
                 if (veiculo.getPlacaDoVeiculo().equals(placa)) {
                     dao.remover(veiculo);
                     System.out.println("Veiculo Removido com sucesso");
-                    break;
+                    return true;
                 }
             }
             throw new VeiculoNaoEncontradoException();
         }catch (VeiculoNaoEncontradoException e) {
             System.err.println(e);
         }
+        return false;
     }
 
     @Override

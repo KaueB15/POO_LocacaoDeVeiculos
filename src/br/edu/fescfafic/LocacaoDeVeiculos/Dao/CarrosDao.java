@@ -15,12 +15,12 @@ public class CarrosDao implements IDao<Carro> {
 
     @Override
     public void adicionar(Carro veiculo){
-
+        listaVeiculos.add(veiculo);
     }
 
     @Override
     public void remover(Carro veiculo) {
-
+        listaVeiculos.remove(veiculo);
     }
 
     @Override

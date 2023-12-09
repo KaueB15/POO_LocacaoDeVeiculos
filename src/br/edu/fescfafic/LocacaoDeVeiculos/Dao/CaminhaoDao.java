@@ -15,12 +15,12 @@ public class CaminhaoDao implements IDao<Caminhao> {
 
     @Override
     public void adicionar(Caminhao objeto) {
-
+        listaCaminhao.add(objeto);
     }
 
     @Override
     public void remover(Caminhao veiculo) {
-
+        listaCaminhao.remove(veiculo);
     }
 
     @Override
