@@ -1,23 +1,22 @@
 package br.edu.fescfafic.LocacaoDeVeiculos.Controller;
 
-import br.edu.fescfafic.LocacaoDeVeiculos.Dao.CarrosDao;
+import br.edu.fescfafic.LocacaoDeVeiculos.Dao.OnibusDao;
 import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.NaoPossuiVeiculoException;
 import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.PlacaJaExistenteException;
 import br.edu.fescfafic.LocacaoDeVeiculos.Exceptions.VeiculoNaoEncontradoException;
 import br.edu.fescfafic.LocacaoDeVeiculos.Interfaces.IController;
-import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Carro;
-import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Veiculo;
+import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Onibus;
 
 import java.util.Scanner;
 
-public class CarrosController implements IController<Carro> {
-    private CarrosDao dao = new CarrosDao();
+public class OnibusController implements IController<Onibus> {
 
+    public OnibusDao dao = new OnibusDao();
 
     @Override
     public void remover(String placa) {
         try {
-            for (Carro veiculo : dao.listaVeiculos) {
+            for (Onibus veiculo : dao.listaOnibus) {
                 if (veiculo.getPlacaDoVeiculo().equals(placa)) {
                     dao.remover(veiculo);
                     System.out.println("Veiculo Removido com sucesso");
@@ -38,7 +37,7 @@ public class CarrosController implements IController<Carro> {
         String combustivelNovo;
         int anoNovo;
         try{
-            for(Carro veiculo : dao.listaVeiculos){
+            for(Onibus veiculo : dao.listaOnibus){
                 if (veiculo.getPlacaDoVeiculo().equals(placa)){
                     System.out.println("- Nova marca do veiculo -");
                     marcaNova = teclado.nextLine();
@@ -64,10 +63,10 @@ public class CarrosController implements IController<Carro> {
     }
 
     @Override
-    public void adicionar(Carro veiculo) {
+    public void adicionar(Onibus veiculo) {
         try {
-            for(Carro carro : dao.listaVeiculos) {
-                if (carro.getPlacaDoVeiculo().equals(veiculo.getPlacaDoVeiculo())){
+            for(Onibus moto : dao.listaOnibus) {
+                if (moto.getPlacaDoVeiculo().equals(veiculo.getPlacaDoVeiculo())){
                     throw new PlacaJaExistenteException();
                 }
             }
@@ -81,7 +80,7 @@ public class CarrosController implements IController<Carro> {
     @Override
     public boolean listar() {
         try{
-            for(Carro veiculo : dao.listaVeiculos){
+            for(Onibus veiculo : dao.listaOnibus){
                 if(veiculo != null){
                     System.out.println("=".repeat(40));
                     System.out.println("Placa - " + veiculo.getPlacaDoVeiculo());
@@ -95,7 +94,7 @@ public class CarrosController implements IController<Carro> {
             }
             throw new NaoPossuiVeiculoException();
         }catch(NaoPossuiVeiculoException e){
-           System.err.println(e);
+            System.err.println(e);
         }
         return false;
     }
