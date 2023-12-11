@@ -1,13 +1,14 @@
 package br.edu.fescfafic.LocacaoDeVeiculos.Main;
 
 import br.edu.fescfafic.LocacaoDeVeiculos.Controller.*;
+import br.edu.fescfafic.LocacaoDeVeiculos.Model.Users.Cliente;
 import br.edu.fescfafic.LocacaoDeVeiculos.Model.Users.Gerente;
-import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Carro;
+import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.*;
 import br.edu.fescfafic.LocacaoDeVeiculos.Util.Menus;
 
 import java.util.Scanner;
 
-public class Main {
+public class    Main {
     public static void main(String[] args) {
         Gerente gerentePrincipal = new Gerente(
                 0,
@@ -27,6 +28,7 @@ public class Main {
         OnibusController onibusController = new OnibusController();
         VansController vansController = new VansController();
         CaminhaoController caminhaoController = new CaminhaoController();
+        ClientesController clientesController = new ClientesController();
 
 
         while(rodar){
@@ -48,6 +50,44 @@ public class Main {
                             opcaoGerente = tecladoOpcao.nextInt();
                             switch(opcaoGerente){
                                 case 1:
+                                    String nome;
+                                    int id;
+                                    String cpf;
+                                    String loginCliente;
+                                    String senhaCliente;
+                                    int idade;
+                                    boolean habilitado;
+                                    System.out.println("=".repeat(40));
+                                    System.out.println("Cadastro cliente");
+                                    System.out.println("=".repeat(40));
+                                    System.out.println("- Digite o nome do cliente -");
+                                    nome = tecladoTexto.nextLine();
+                                    System.out.println("- Digite o id do cliente -");
+                                    id = tecladoOpcao.nextInt();
+                                    System.out.println("- Digite o cpf do cliente -");
+                                    cpf = tecladoTexto.nextLine();
+                                    System.out.println("- Digite a idade do cliente -");
+                                    idade = tecladoOpcao.nextInt();
+                                    System.out.println("- Digite o login do cliente -");
+                                    loginCliente = tecladoTexto.nextLine();
+                                    System.out.println("- Digite a senha do cliente -");
+                                    senhaCliente = tecladoTexto.nextLine();
+                                    System.out.println("- O cliente é habilitado -");
+                                    habilitado = tecladoTexto.nextBoolean();
+                                    Cliente novoCliente = new Cliente(
+                                            id,
+                                            cpf,
+                                            nome,
+                                            idade,
+                                            loginCliente,
+                                            senhaCliente,
+                                            habilitado
+                                    );
+                                    clientesController.adicionar(novoCliente);
+                                    System.out.println("=".repeat(40));
+                                    System.out.println("Cliente adicionado");
+                                    System.out.println("=".repeat(40));
+                                    break;
                                 case 2:
                                     boolean rodarVeiculo = true;
                                     int opcaoVeiculo;
@@ -106,63 +146,196 @@ public class Main {
                                                     }
                                                 break;
                                                 case 2:
-                                                    menus.menuCrud("Moto");
-                                                    opcaoMenuCrud = tecladoOpcao.nextInt();
-                                                    switch (opcaoMenuCrud) {
-                                                        case 1:
-                                                        case 2:
-                                                        case 3:
-                                                        case 4:
-                                                        case 5:
-                                                        default:
-                                                            System.out.println("=".repeat(40));
-                                                            System.out.println("Opção invalida, tente novamente");
-                                                            System.out.println("=".repeat(40) + "\n");
+                                                    while(rodarMenuCrud) {
+                                                        menus.menuCrud("Moto");
+                                                        opcaoMenuCrud = tecladoOpcao.nextInt();
+                                                        switch (opcaoMenuCrud) {
+                                                            case 1:
+                                                                System.out.println("Digite a Marca do Veiculo");
+                                                                String marcaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Modelo do Veiculo");
+                                                                String modeloDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Ano do Veiculo");
+                                                                int anoDoVeiculo = tecladoOpcao.nextInt();
+                                                                System.out.println("Digite a Placa do Veiculo");
+                                                                String placaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Combustivel Usado no Veiculo");
+                                                                String combustivelDoVeiculo = tecladoTexto.nextLine();
+                                                                Moto novaMoto= new Moto(
+                                                                        placaDoVeiculo,
+                                                                        modeloDoVeiculo,
+                                                                        anoDoVeiculo,
+                                                                        combustivelDoVeiculo,
+                                                                        marcaDoVeiculo
+                                                                );
+                                                                motosController.adicionar(novaMoto);
+                                                                break;
+                                                            case 2:
+                                                                System.out.println("Placa do Veiculo que quer remover");
+                                                                String placaRemover = tecladoTexto.nextLine();
+                                                                motosController.remover(placaRemover);
+                                                                break;
+                                                            case 3:
+                                                                System.out.println("Placa do Veiculo que quer atualizar");
+                                                                String placaAtualizar = tecladoTexto.nextLine();
+                                                                motosController.atualizar(placaAtualizar);
+                                                                break;
+                                                            case 4:
+                                                                motosController.listar();
+                                                                break;
+                                                            case 5:
+                                                                rodarMenuCrud = false;
+                                                                break;
+                                                            default:
+                                                                System.out.println("=".repeat(40));
+                                                                System.out.println("Opção invalida, tente novamente");
+                                                                System.out.println("=".repeat(40) + "\n");
+                                                        }
                                                     }
                                                     break;
                                                 case 3:
-                                                    menus.menuCrud("Caminhão");
-                                                    opcaoMenuCrud = tecladoOpcao.nextInt();
-                                                    switch (opcaoMenuCrud) {
-                                                        case 1:
-                                                        case 2:
-                                                        case 3:
-                                                        case 4:
-                                                        case 5:
-                                                        default:
-                                                            System.out.println("=".repeat(40));
-                                                            System.out.println("Opção invalida, tente novamente");
-                                                            System.out.println("=".repeat(40) + "\n");
+                                                    while (rodarMenuCrud) {
+                                                        menus.menuCrud("Caminhão");
+                                                        opcaoMenuCrud = tecladoOpcao.nextInt();
+                                                        switch (opcaoMenuCrud) {
+                                                            case 1:
+                                                                System.out.println("Digite a Marca do Veiculo");
+                                                                String marcaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Modelo do Veiculo");
+                                                                String modeloDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Ano do Veiculo");
+                                                                int anoDoVeiculo = tecladoOpcao.nextInt();
+                                                                System.out.println("Digite a Placa do Veiculo");
+                                                                String placaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Combustivel Usado no Veiculo");
+                                                                String combustivelDoVeiculo = tecladoTexto.nextLine();
+                                                                Caminhao novoCaminhao= new Caminhao(
+                                                                        placaDoVeiculo,
+                                                                        modeloDoVeiculo,
+                                                                        anoDoVeiculo,
+                                                                        combustivelDoVeiculo,
+                                                                        marcaDoVeiculo
+                                                                );
+                                                                caminhaoController.adicionar(novoCaminhao);
+                                                                break;
+                                                            case 2:
+                                                                System.out.println("Placa do Veiculo que quer remover");
+                                                                String placaRemover = tecladoTexto.nextLine();
+                                                                caminhaoController.remover(placaRemover);
+                                                                break;
+                                                            case 3:
+                                                                System.out.println("Placa do Veiculo que quer atualizar");
+                                                                String placaAtualizar = tecladoTexto.nextLine();
+                                                                caminhaoController.atualizar(placaAtualizar);
+                                                                break;
+                                                            case 4:
+                                                                motosController.listar();
+                                                                break;
+                                                            case 5:
+                                                                rodarMenuCrud = false;
+                                                                break;
+                                                            default:
+                                                                System.out.println("=".repeat(40));
+                                                                System.out.println("Opção invalida, tente novamente");
+                                                                System.out.println("=".repeat(40) + "\n");
+                                                        }
                                                     }
                                                     break;
                                                 case 4:
-                                                    menus.menuCrud("Van");
-                                                    opcaoMenuCrud = tecladoOpcao.nextInt();
-                                                    switch (opcaoMenuCrud) {
-                                                        case 1:
-                                                        case 2:
-                                                        case 3:
-                                                        case 4:
-                                                        case 5:
-                                                        default:
-                                                            System.out.println("=".repeat(40));
-                                                            System.out.println("Opção invalida, tente novamente");
-                                                            System.out.println("=".repeat(40) + "\n");
+                                                    while (rodarMenuCrud) {
+                                                        menus.menuCrud("Van");
+                                                        opcaoMenuCrud = tecladoOpcao.nextInt();
+                                                        switch (opcaoMenuCrud) {
+                                                            case 1:
+                                                                System.out.println("Digite a Marca do Veiculo");
+                                                                String marcaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Modelo do Veiculo");
+                                                                String modeloDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Ano do Veiculo");
+                                                                int anoDoVeiculo = tecladoOpcao.nextInt();
+                                                                System.out.println("Digite a Placa do Veiculo");
+                                                                String placaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Combustivel Usado no Veiculo");
+                                                                String combustivelDoVeiculo = tecladoTexto.nextLine();
+                                                                Van novaVan = new Van(
+                                                                        placaDoVeiculo,
+                                                                        modeloDoVeiculo,
+                                                                        anoDoVeiculo,
+                                                                        combustivelDoVeiculo,
+                                                                        marcaDoVeiculo
+                                                                );
+                                                                vansController.adicionar(novaVan);
+
+                                                                break;
+                                                            case 2:
+                                                                System.out.println("Placa do Veiculo que quer remover");
+                                                                String placaRemover = tecladoTexto.nextLine();
+                                                                vansController.remover(placaRemover);
+                                                                break;
+                                                            case 3:
+                                                                System.out.println("Placa do Veiculo que quer atualizar");
+                                                                String placaAtualizar = tecladoTexto.nextLine();
+                                                                onibusController.atualizar(placaAtualizar);
+                                                                break;
+                                                            case 4:
+                                                                onibusController.listar();
+                                                                break;
+                                                            case 5:
+                                                                rodarMenuCrud = false;
+                                                                break;
+                                                            default:
+                                                                System.out.println("=".repeat(40));
+                                                                System.out.println("Opção invalida, tente novamente");
+                                                                System.out.println("=".repeat(40) + "\n");
+                                                        }
                                                     }
                                                     break;
                                                 case 5:
-                                                    menus.menuCrud("Onibus");
-                                                    opcaoMenuCrud = tecladoOpcao.nextInt();
-                                                    switch (opcaoMenuCrud) {
-                                                        case 1:
-                                                        case 2:
-                                                        case 3:
-                                                        case 4:
-                                                        case 5:
-                                                        default:
-                                                            System.out.println("=".repeat(40));
-                                                            System.out.println("Opção invalida, tente novamente");
-                                                            System.out.println("=".repeat(40) + "\n");
+                                                    while (rodarMenuCrud) {
+                                                        menus.menuCrud("Onibus");
+                                                        opcaoMenuCrud = tecladoOpcao.nextInt();
+                                                        switch (opcaoMenuCrud) {
+                                                            case 1:
+                                                                System.out.println("Digite a Marca do Veiculo");
+                                                                String marcaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Modelo do Veiculo");
+                                                                String modeloDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Ano do Veiculo");
+                                                                int anoDoVeiculo = tecladoOpcao.nextInt();
+                                                                System.out.println("Digite a Placa do Veiculo");
+                                                                String placaDoVeiculo = tecladoTexto.nextLine();
+                                                                System.out.println("Digite o Combustivel Usado no Veiculo");
+                                                                String combustivelDoVeiculo = tecladoTexto.nextLine();
+                                                                Onibus novoOnibus = new Onibus(
+                                                                        placaDoVeiculo,
+                                                                        modeloDoVeiculo,
+                                                                        anoDoVeiculo,
+                                                                        combustivelDoVeiculo,
+                                                                        marcaDoVeiculo
+                                                                );
+                                                                onibusController.adicionar(novoOnibus);
+                                                                break;
+                                                            case 2:
+                                                                System.out.println("Placa do Veiculo que quer remover");
+                                                                String placaRemover = tecladoTexto.nextLine();
+                                                                onibusController.remover(placaRemover);
+                                                                break;
+                                                            case 3:
+                                                                System.out.println("Placa do Veiculo que quer atualizar");
+                                                                String placaAtualizar = tecladoTexto.nextLine();
+                                                                onibusController.atualizar(placaAtualizar);
+                                                                break;
+                                                            case 4:
+                                                                onibusController.listar();
+                                                                break;
+                                                            case 5:
+                                                                rodarMenuCrud = false;
+                                                                break;
+                                                            default:
+                                                                System.out.println("=".repeat(40));
+                                                                System.out.println("Opção invalida, tente novamente");
+                                                                System.out.println("=".repeat(40) + "\n");
+                                                        }
                                                     }
                                                     break;
                                                 case 6:

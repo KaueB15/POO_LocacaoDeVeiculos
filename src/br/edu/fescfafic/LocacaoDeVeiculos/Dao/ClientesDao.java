@@ -2,10 +2,12 @@ package br.edu.fescfafic.LocacaoDeVeiculos.Dao;
 
 import br.edu.fescfafic.LocacaoDeVeiculos.Interfaces.IDao;
 import br.edu.fescfafic.LocacaoDeVeiculos.Model.Users.Cliente;
-import br.edu.fescfafic.LocacaoDeVeiculos.Model.Veiculos.Veiculo;
+
+import java.util.ArrayList;
 
 public class ClientesDao implements IDao<Cliente> {
 
+    public ArrayList<Cliente> listaClientes = new ArrayList<>();
     @Override
     public void listar() {
 
@@ -13,12 +15,12 @@ public class ClientesDao implements IDao<Cliente> {
 
     @Override
     public void adicionar(Cliente objeto) {
-
+        listaClientes.add(objeto);
     }
 
     @Override
     public void remover(Cliente veiculo) {
-
+        listaClientes.remove(veiculo);
     }
 
     @Override

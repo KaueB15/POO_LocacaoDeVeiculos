@@ -36,6 +36,8 @@ public class CaminhaoController implements IController<Caminhao> {
         String marcaNova;
         String modeloNovo;
         String combustivelNovo;
+        boolean alugado;
+        String pessoaQueAlugou;
         int anoNovo;
         try{
             for(Caminhao veiculo : dao.listaCaminhao){
@@ -46,6 +48,10 @@ public class CaminhaoController implements IController<Caminhao> {
                     modeloNovo = teclado.nextLine();
                     System.out.println("- Novo combustivel do veiculo -");
                     combustivelNovo = teclado.nextLine();
+                    System.out.println("- Está alugado -");
+                    alugado = teclado.nextBoolean();
+                    System.out.println("- Quem alugou o veiculo -");
+                    pessoaQueAlugou = teclado.nextLine();
                     System.out.println("- Novo ano do veiculo -");
                     anoNovo = teclado.nextInt();
 
@@ -53,6 +59,8 @@ public class CaminhaoController implements IController<Caminhao> {
                     veiculo.setModeloDoVeiculo(modeloNovo);
                     veiculo.setCombustivelUsado(combustivelNovo);
                     veiculo.setAnoDoVeiculo(anoNovo);
+                    veiculo.setAlugado(alugado);
+                    veiculo.setPessoaQueAlugou(pessoaQueAlugou);
                     return "Veiculo Atualizado";
                 }
             }
@@ -89,6 +97,8 @@ public class CaminhaoController implements IController<Caminhao> {
                     System.out.println("Modelo - " + veiculo.getModeloDoVeiculo());
                     System.out.println("Ano - " + veiculo.getAnoDoVeiculo());
                     System.out.println("Combustivel - " + veiculo.getCombustivelUsado());
+                    System.out.println("Alugado - " + veiculo.getAlugado());
+                    System.out.println("Pessoa que alugou - " + veiculo.getPessoaQueAlugou());
                     System.out.println("=".repeat(40));
                     return true;
                 }
