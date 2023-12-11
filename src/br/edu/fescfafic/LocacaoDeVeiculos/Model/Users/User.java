@@ -45,7 +45,7 @@ public abstract class User implements IUser {
     }
 
     @Override
-    public void setNome(String nome) {
-        this.nome == nome;
+    public void setNome(String nomeNovo) {
+        this.nome = nomeNovo;
     }
 }
