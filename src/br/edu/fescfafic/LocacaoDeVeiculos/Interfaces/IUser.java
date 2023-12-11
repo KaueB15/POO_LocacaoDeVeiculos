@@ -6,4 +6,5 @@ public interface IUser {
     String getLogin();
     String getSenha();
     String getCPF();
+    void setNome(String nome);
 }

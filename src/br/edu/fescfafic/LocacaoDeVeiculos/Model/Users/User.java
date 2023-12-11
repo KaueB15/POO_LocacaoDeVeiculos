@@ -43,4 +43,9 @@ public abstract class User implements IUser {
     public String getCPF() {
         return this.cpf;
     }
+
+    @Override
+    public void setNome(String nome) {
+        this.nome == nome;
+    }
 }
